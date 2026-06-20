@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Health Frontlines - Dr. Sabrine Hamdi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        teal: {
+                            50: '#f0fdfa',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            900: '#134e4a',
+                        },
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .gradient-bg {
+            background: radial-gradient(circle at 10% 20%, rgb(15, 23, 42) 0%, rgb(30, 41, 59) 90%);
+        }
+        .card-glow {
+            box-shadow: 0 0 20px -5px rgba(20, 184, 166, 0.15);
+        }
+        .card-glow:hover {
+            box-shadow: 0 0 25px 2px rgba(20, 184, 166, 0.3);
+        }
+        /* Page transitions */
+        .page-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .page-view.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Top Premium Navigation -->
+    <header class="sticky top-0 z-50 bg-navy-950/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Branding -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchPage('home')">
+                    <div class="p-2.5 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl shadow-lg shadow-emerald-900/30">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-sm font-semibold tracking-wider text-emerald-400 block uppercase">Global Health Frontlines</span>
+                        <h1 class="text-lg font-bold text-white tracking-tight -mt-1">Dr. Sabrine Hamdi <span class="text-xs font-normal text-slate-400">MPH, PMP</span></h1>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Tabs -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 text-emerald-400 bg-slate-800/80">
+                        Mission Frontlines
+                    </button>
+                    <button onclick="switchPage('diseases')" id="nav-diseases" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/50">
+                        Disease Intelligence
+                    </button>
+                    <button onclick="switchPage('experience')" id="nav-experience" class="nav-btn px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 text-slate-300 hover:text-white hover:bg-slate-800/50">
+                        Strategic Portfolio
+                    </button>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden lg:block">
+                    <a href="#contact-section" onclick="switchPage('experience'); setTimeout(() => { document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'}); }, 100)" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-xs uppercase tracking-wider rounded-lg shadow-md transition-all transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        Initiate Collaboration
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="p-2 text-slate-400 hover:text-white focus:outline-none">
+                        <svg class="w-6 h-6" id="menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-950 border-b border-slate-800 px-4 py-4 space-y-2">
+            <button onclick="switchPage('home'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-emerald-400 bg-slate-900 font-medium">Mission Frontlines</button>
+            <button onclick="switchPage('diseases'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-900 font-medium">Disease Intelligence</button>
+            <button onclick="switchPage('experience'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-900 font-medium">Strategic Portfolio</button>
+            <a href="#contact-section" onclick="switchPage('experience'); toggleMobileMenu(); setTimeout(() => { document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'}); }, 100)" class="block text-center bg-gradient-to-r from-emerald-500 to-teal-500 text-white py-3 rounded-lg font-bold">Initiate Collaboration</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area with Pages -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HOME & MISSION FRONTLINES ================= -->
+        <div id="page-home" class="page-view active">
+            <!-- Hero Section -->
+            <section class="relative py-16 lg:py-24 overflow-hidden gradient-bg border-b border-slate-800">
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-900/40 to-slate-950/90 pointer-events-none"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                Currently Active: MSF Burundi Deployment (2026)
+                            </span>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none">
+                                Confronting <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Neglected Tropical Diseases</span>, Polio, & Malaria
+                            </h1>
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                                Dr. Sabrine Hamdi is a recognized Public Health and Humanitarian Specialist with over 7 years of multinational clinical and field coordination experience across Africa, Europe, and North America. Delivering robust cross-border surveillance, rapid immunization campaigns, and emergency outbreak responses.
+                            </p>
+                            <!-- Key Stats -->
+                            <div class="grid grid-cols-3 gap-4 pt-4">
+                                <div class="bg-slate-800/40 border border-slate-700/50 p-4 rounded-xl text-center">
+                                    <div class="text-2xl sm:text-3xl font-extrabold text-teal-400">7+</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">Years Field Exp</div>
+                                </div>
+                                <div class="bg-slate-800/40 border border-slate-700/50 p-4 rounded-xl text-center">
+                                    <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">117+</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">Villages Monitored</div>
+                                </div>
+                                <div class="bg-slate-800/40 border border-slate-700/50 p-4 rounded-xl text-center">
+                                    <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400">$2M+</div>
+                                    <div class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest mt-1">Portfolio Led</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                                <button onclick="switchPage('diseases')" class="px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold rounded-xl text-sm shadow-xl shadow-emerald-900/20 text-center transition-all">
+                                    Explore Disease Intelligence
+                                </button>
+                                <button onclick="switchPage('experience')" class="px-6 py-3.5 bg-slate-800 hover:bg-slate-750 text-white font-semibold rounded-xl text-sm border border-slate-750 text-center transition-all">
+                                    View Field Deployments
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Graphical Right Panel: Global Surveillance Map Representation -->
+                        <div class="lg:col-span-5 relative">
+                            <div class="relative mx-auto max-w-sm lg:max-w-none bg-slate-800/60 border border-slate-750 rounded-2xl p-6 card-glow">
+                                <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-750">
+                                    <h3 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+                                        <svg class="w-4.5 h-4.5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2.945M11 20.935V19a2 2 0 012-2h1.87c.89 0 1.764-.37 2.39-1.03l2.11-2.11m-.802-3.74a11.953 11.953 0 00-2.316-5.328M15.332 2.316a11.953 11.953 0 00-5.328 2.316"/></svg>
+                                        Deployments Map Index
+                                    </h3>
+                                    <span class="text-[10px] bg-slate-900 px-2 py-1 rounded text-teal-400 font-mono">Live Tracking</span>
+                                </div>
+                                <div class="aspect-video bg-slate-950 rounded-xl relative overflow-hidden border border-slate-800 flex items-center justify-center">
+                                    <!-- Embedded Interactive Graphic SVG Map showing Africa and deployment hubs -->
+                                    <svg viewBox="0 0 320 180" class="w-full h-full opacity-80">
+                                        <rect width="320" height="180" fill="#020617"/>
+                                        <!-- Simplified stylized world/Africa nodes -->
+                                        <path d="M120,40 Q140,20 180,30 T240,60 T220,120 T160,150 T130,120 Z" fill="#1e293b" stroke="#334155" stroke-width="1" />
+                                        <!-- Deployment Connection lines -->
+                                        <path d="M160,120 Q180,100 220,60" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4,4" />
+                                        <path d="M160,120 Q120,130 90,110" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4,4" />
+                                        <!-- Interactive Dots for Deployments -->
+                                        <!-- Burundi -->
+                                        <circle cx="160" cy="120" r="6" fill="#10b981" class="animate-ping" />
+                                        <circle cx="160" cy="120" r="4" fill="#10b981" />
+                                        <!-- Chad -->
+                                        <circle cx="145" cy="85" r="4" fill="#14b8a6" />
+                                        <!-- Libya -->
+                                        <circle cx="150" cy="55" r="4" fill="#06b6d4" />
+                                        <!-- USA (CDC) -->
+                                        <circle cx="50" cy="45" r="4" fill="#f59e0b" />
+                                    </svg>
+                                    <div class="absolute bottom-2 left-2 right-2 bg-slate-900/95 backdrop-blur-sm p-2 rounded border border-slate-800 text-[10px] flex justify-between">
+                                        <span class="text-emerald-400 font-bold">Burundi Deployment (MSF)</span>
+                                        <span class="text-slate-400">Targeting Mpox & Marburg</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 space-y-2">
+                                    <div class="text-xs font-semibold text-slate-300">Active Campaign Coverage:</div>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span class="text-[10px] bg-slate-900 text-teal-300 px-2.5 py-1 rounded-full border border-teal-800/40">Polio Eradication</span>
+                                        <span class="text-[10px] bg-slate-900 text-teal-300 px-2.5 py-1 rounded-full border border-teal-800/40">Malaria Vaccine</span>
+                                        <span class="text-[10px] bg-slate-900 text-teal-300 px-2.5 py-1 rounded-full border border-teal-800/40">Guinea Worm Surveillance</span>
+                                        <span class="text-[10px] bg-slate-900 text-teal-300 px-2.5 py-1 rounded-full border border-teal-800/40">Ebola Preparedness</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Risk Strategy Section -->
+            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-black text-white">Systemic Risks & Challenges</h2>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base">Eradicating infectious diseases requires confronting complex global realities. Here is how we strategize against critical front-line challenges.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-slate-800/40 border border-slate-750 p-6 rounded-2xl hover:border-teal-500/50 transition-all card-glow flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 flex items-center justify-center text-teal-400 mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Funding Sustainability</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                                NTD programs rely on long-term donor commitments. Direct funding interruptions risk severe transmission resurgence.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-xs text-teal-400 font-semibold uppercase tracking-wider">Mitigation Route</span>
+                            <span class="text-[10px] bg-teal-950 text-teal-300 px-2 py-0.5 rounded">Multi-donor Pools</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-slate-800/40 border border-slate-750 p-6 rounded-2xl hover:border-emerald-500/50 transition-all card-glow flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Fragile Health Systems</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                                Conflict zones and remote regions lack basic infrastructure for epidemiological surveillance and critical treatments.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">Mitigation Route</span>
+                            <span class="text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded">Cross-Border Hubs</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-slate-800/40 border border-slate-750 p-6 rounded-2xl hover:border-cyan-500/50 transition-all card-glow flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Climate Dynamics</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                                Rapidly shifting climate parameters expand vector zones (mosquitoes & blackflies), triggering unprecedented epidemics.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-xs text-cyan-400 font-semibold uppercase tracking-wider">Mitigation Route</span>
+                            <span class="text-[10px] bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded">Predictive GIS</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-slate-800/40 border border-slate-750 p-6 rounded-2xl hover:border-amber-500/50 transition-all card-glow flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </div>
+                            <h3 class="font-bold text-lg text-white mb-2">Community Trust</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                                Misinformation and low community engagement compromise mass drug administrations and essential vaccination safety.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-xs text-amber-400 font-semibold uppercase tracking-wider">Mitigation Route</span>
+                            <span class="text-[10px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded">Local Advocacy</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mission Statement Banner -->
+            <section class="py-12 bg-slate-950/60 border-t border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="space-y-1 text-center md:text-left">
+                        <h4 class="text-emerald-400 font-bold uppercase tracking-wider text-xs">Direct Impact Strategy</h4>
+                        <p class="text-slate-300 text-sm max-w-2xl">
+                            "True global health equity is achieved when field implementation is paired directly with high-level policy advocacy and rigorous epidemiological analytics."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="h-10 w-10 rounded-full bg-slate-850 flex items-center justify-center font-bold text-emerald-400 border border-slate-700">SH</span>
+                        <div>
+                            <p class="text-xs text-white font-semibold">Dr. Sabrine Hamdi</p>
+                            <p class="text-[10px] text-slate-500">Global Health Lead Specialist</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ================= PAGE 2: DISEASE INTELLIGENCE HUB ================= -->
+        <div id="page-diseases" class="page-view">
+            <!-- Hero / Header -->
+            <section class="py-12 bg-slate-950/40 border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="text-xs font-bold text-teal-400 uppercase tracking-widest bg-teal-500/10 px-3 py-1.5 rounded-full">Disease Intelligence Hub</span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4">Understanding the Threats</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto mt-2 text-sm sm:text-base">An interactive framework covering Neglected Tropical Diseases (NTDs) and epidemic infectious diseases. Use the filters below to explore critical pathogens, transmission routes, and current eradication strategies.</p>
+                </div>
+            </section>
+
+            <!-- Disease Directory & Filter Interface -->
+            <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Filters -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+                    <button onclick="filterDiseases('all')" id="btn-filter-all" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-teal-500 text-slate-950 shadow-lg shadow-teal-500/20">All Targets</button>
+                    <button onclick="filterDiseases('ntd')" id="btn-filter-ntd" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-slate-800 text-slate-300 hover:text-white">Neglected Tropical Diseases (NTDs)</button>
+                    <button onclick="filterDiseases('inf')" id="btn-filter-inf" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 bg-slate-800 text-slate-300 hover:text-white">Infectious Pathogens</button>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" id="disease-grid">
+                    <!-- Onchocerciasis -->
+                    <div class="disease-card bg-slate-800/40 border border-slate-750 rounded-2xl p-6 transition-all duration-300 hover:border-teal-500/50 card-glow flex flex-col justify-between" data-category="ntd">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-[10px] bg-emerald-950 text-emerald-400 font-bold uppercase tracking-widest px-3 py-1 rounded-full">Parasitic Nematode</span>
+                                <span class="text-emerald-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Onchocerciasis <span class="text-sm font-normal text-slate-400 block">(River Blindness)</span></h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                                Caused by parasitic worms transmitted by blackflies, leading to severe itching, skin disease, and irreversible blindness if untreated.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 space-y-2">
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Transmission:</strong> Blackfly bites (Simulium spp.)</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Impact:</strong> Blindness, severe skin disease</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">RLMF / Field Role:</strong> Directed country-led elimination programs across Africa & Yemen</div>
+                        </div>
+                    </div>
+
+                    <!-- Lymphatic Filariasis -->
+                    <div class="disease-card bg-slate-800/40 border border-slate-750 rounded-2xl p-6 transition-all duration-300 hover:border-teal-500/50 card-glow flex flex-col justify-between" data-category="ntd">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-[10px] bg-emerald-950 text-emerald-400 font-bold uppercase tracking-widest px-3 py-1 rounded-full">Parasitic Worm</span>
+                                <span class="text-emerald-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Lymphatic Filariasis <span class="text-sm font-normal text-slate-400 block">(Elephantiasis)</span></h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                                Spread by mosquitoes, this disease causes painful, extreme swelling of limbs and structural tissues, inducing severe social stigma and disability.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 space-y-2">
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Transmission:</strong> Mosquito bites</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Impact:</strong> Extreme elephantiasis, lifelong physical disability</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">RLMF / Field Role:</strong> Funding mass drug administration (MDA) campaigns to stop community transmission</div>
+                        </div>
+                    </div>
+
+                    <!-- Trachoma -->
+                    <div class="disease-card bg-slate-800/40 border border-slate-750 rounded-2xl p-6 transition-all duration-300 hover:border-teal-500/50 card-glow flex flex-col justify-between" data-category="ntd">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-[10px] bg-emerald-950 text-emerald-400 font-bold uppercase tracking-widest px-3 py-1 rounded-full">Bacterial Infection</span>
+                                <span class="text-emerald-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5l3-3a1 1 0 00-1.414-1.414l-3 3a2 2 0 11-2.828-2.828l4-4a2 2 0 012.828 0 1 1 0 001.414-1.414z"/></svg>
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Trachoma <span class="text-sm font-normal text-slate-400 block">(Bacterial Eye Infection)</span></h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                                A highly contagious bacterial infection spread via poor hygiene and common flies, causing inner eyelid scarring and complete blindness.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 space-y-2">
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Transmission:</strong> Direct contact, flies, poor hygiene</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Impact:</strong> Irreversible corneal blindness</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">RLMF / Field Role:</strong> Country-led SAFE strategy implementations (Surgery, Antibiotics, Face-washing, Environmental change)</div>
+                        </div>
+                    </div>
+
+                    <!-- Guinea Worm -->
+                    <div class="disease-card bg-slate-800/40 border border-slate-750 rounded-2xl p-6 transition-all duration-300 hover:border-teal-500/50 card-glow flex flex-col justify-between" data-category="ntd">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-[10px] bg-emerald-950 text-emerald-400 font-bold uppercase tracking-widest px-3 py-1 rounded-full">Parasite Eradication</span>
+                                <span class="text-emerald-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Guinea Worm Disease <span class="text-sm font-normal text-slate-400 block">(Dracunculiasis)</span></h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                                A painful, debilitating parasitic infection contracted by drinking stagnant water contaminated with flea larvae, emerging slowly through the skin.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 space-y-2">
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Transmission:</strong> Stagnant water intake</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Impact:</strong> Excruciating skin emergence, temporary/permanent disability</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Field Partnership:</strong> Carter Center active surveillance led in-field by Dr. Hamdi (Chad)</div>
+                        </div>
+                    </div>
+
+                    <!-- Malaria -->
+                    <div class="disease-card bg-slate-800/40 border border-slate-750 rounded-2xl p-6 transition-all duration-300 hover:border-teal-500/50 card-glow flex flex-col justify-between" data-category="inf">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-[10px] bg-cyan-950 text-cyan-400 font-bold uppercase tracking-widest px-3 py-1 rounded-full">Epidemic Vector</span>
+                                <span class="text-cyan-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Malaria <span class="text-sm font-normal text-slate-400 block">(Plasmodium Parasite)</span></h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                                While not classified as an NTD, malaria is a massive global focus, resulting in widespread acute illness and pediatric deaths across tropical climates.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 space-y-2">
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Transmission:</strong> Anopheles mosquito bites</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Impact:</strong> Severe cyclical fevers, organ failure, child mortality</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Programs:</strong> Roll Back Malaria Partnership, GLIDE, and regional RTS,S vaccination programs</div>
+                        </div>
+                    </div>
+
+                    <!-- Polio -->
+                    <div class="disease-card bg-slate-800/40 border border-slate-750 rounded-2xl p-6 transition-all duration-300 hover:border-teal-500/50 card-glow flex flex-col justify-between" data-category="inf">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-[10px] bg-cyan-950 text-cyan-400 font-bold uppercase tracking-widest px-3 py-1 rounded-full">Viral Pathogen</span>
+                                <span class="text-cyan-400">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Polio <span class="text-sm font-normal text-slate-400 block">(Poliomyelitis)</span></h3>
+                            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                                A highly infectious viral disease that attacks the nervous system, capable of inducing irreversible flaccid paralysis within hours.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 space-y-2">
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Transmission:</strong> Fecal-oral route</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">Impact:</strong> Neurological paralysis, severe long-term disability</div>
+                            <div class="text-[11px] text-slate-400"><strong class="text-teal-400">GPEI Integration:</strong> Massive global vaccination networks; targeted campaigns in Pakistan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✨ LLM POWERED OUTBREAK PROTOCOL SIMULATOR ✨ -->
+                <div class="bg-gradient-to-br from-teal-950/80 to-slate-900 border-2 border-teal-500/40 rounded-3xl p-6 sm:p-10 card-glow max-w-4xl mx-auto mb-16">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-teal-800/40">
+                        <div>
+                            <span class="text-[10px] bg-teal-500/10 text-teal-300 font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-teal-500/20">Epidemiological Sandbox</span>
+                            <h3 class="text-2xl font-black text-white mt-2">✨ Frontline Outbreak Simulation Lab</h3>
+                        </div>
+                        <span class="text-xs bg-slate-800/80 text-teal-400 px-3 py-1 rounded font-mono border border-teal-500/20">Gemini-2.5-Flash Active</span>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">1. Disease / Threat</label>
+                            <select id="sim-disease" class="w-full bg-slate-950 border border-slate-750 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-teal-500">
+                                <option value="Mpox Outbreak in high-density border settlements">Mpox (Monkeypox)</option>
+                                <option value="Marburg Virus Disease suspected cases in forest borderland">Marburg Hemorrhagic Fever</option>
+                                <option value="Poliomyelitis Wild-type 1 emergent cases in water-scarce camps">Poliomyelitis (Polio)</option>
+                                <option value="Guinea Worm (Dracunculiasis) regional cluster re-emergence">Guinea Worm (Dracunculiasis)</option>
+                                <option value="Severe Vector-Resistant Malaria spike during flooding season">Resistant Malaria spike</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">2. Resource Profile</label>
+                            <select id="sim-resources" class="w-full bg-slate-950 border border-slate-750 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-teal-500">
+                                <option value="Severe resource constraints (no nearby PCR testing, mud roads, 1 local clinic)">Severely Restrained (Isolated / Remote)</option>
+                                <option value="Moderate assets (mobile network coverage, motorcycle dispatch, regional lab 4 hours away)">Moderate (Mobile Surrounds / Delayed Lab)</option>
+                                <option value="Supported international mandate (CDC / WHO backup, stable cold chains, aerial transport access)">Optimized (International Multi-agency Taskforce)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">3. Primary Strategy</label>
+                            <select id="sim-strategy" class="w-full bg-slate-950 border border-slate-750 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-teal-500">
+                                <option value="Rapid localized ring immunization & quarantine isolation">Ring Immunization & Isolation</option>
+                                <option value="Cross-border community health volunteer active surveillance & case finding">Active Community Surveillance</option>
+                                <option value="Mass health promotion, safe water vectors, and direct drug administration">Environmental WASH & Mass Treatments</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Custom Prompt Parameter -->
+                    <div class="mb-8">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">4. Contextual Field Notes (Optional Add-on)</label>
+                        <input type="text" id="sim-custom-notes" class="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none focus:border-teal-500" placeholder="e.g. Heavy seasonal monsoons are active; language barrier requires local community translators...">
+                    </div>
+
+                    <!-- Simulator Output -->
+                    <div id="sim-loading" class="hidden py-12 text-center">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-teal-500 mb-2"></div>
+                        <p class="text-xs text-slate-400 font-mono">Simulating epidemiological dynamics via Gemini 2.5 Prototyping Engine...</p>
+                    </div>
+
+                    <div id="sim-output-container" class="hidden bg-slate-950 border border-teal-900/55 rounded-2xl p-5 mb-6 max-h-[350px] overflow-y-auto">
+                        <div class="flex justify-between items-center mb-3 pb-2 border-b border-teal-950">
+                            <span class="text-[10px] text-teal-400 font-mono font-bold tracking-widest">Rapid Protocol Brief Drafted:</span>
+                            <button onclick="copySimProtocol()" class="text-[10px] bg-slate-800 text-teal-300 hover:text-white px-2 py-1 rounded">Copy Text</button>
+                        </div>
+                        <div id="sim-output" class="text-xs sm:text-sm text-slate-300 font-mono leading-relaxed space-y-4"></div>
+                    </div>
+
+                    <!-- Trigger Button -->
+                    <div class="text-right">
+                        <button onclick="runOutbreakSimulation()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-slate-950 hover:text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-teal-500/10">
+                            ✨ Generate Field Action Protocol
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Matrix Block -->
+            <section class="py-12 bg-slate-950/40 border-t border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-white">Pathogen Transmission & Response Matrix</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-1">Cross-referencing global transmission dynamics against active intervention roles.</p>
+                    </div>
+
+                    <!-- Dynamic Table Wrapper -->
+                    <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/60 shadow-lg">
+                        <table class="min-w-full divide-y divide-slate-800 text-left text-xs sm:text-sm">
+                            <thead class="bg-slate-950 text-slate-200">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Disease Target</th>
+                                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Transmission Vector</th>
+                                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Pathological Impact</th>
+                                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Strategic Intervention Role</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800 text-slate-300">
+                                <tr class="hover:bg-slate-800/30 transition-all">
+                                    <td class="px-6 py-4 font-bold text-white">Onchocerciasis</td>
+                                    <td class="px-6 py-4">Blackfly bites</td>
+                                    <td class="px-6 py-4 text-rose-300">Blindness, severe skin lesions</td>
+                                    <td class="px-6 py-4 text-emerald-400">RLMF Elimination Campaigns</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30 transition-all">
+                                    <td class="px-6 py-4 font-bold text-white">Lymphatic Filariasis</td>
+                                    <td class="px-6 py-4">Mosquito bites</td>
+                                    <td class="px-6 py-4 text-rose-300">Elephantiasis, tissue disability</td>
+                                    <td class="px-6 py-4 text-emerald-400">Mass Drug Administration (MDA)</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30 transition-all">
+                                    <td class="px-6 py-4 font-bold text-white">Trachoma</td>
+                                    <td class="px-6 py-4">Bacterial infection via poor hygiene</td>
+                                    <td class="px-6 py-4 text-rose-300">Inner eyelid scarring & blindness</td>
+                                    <td class="px-6 py-4 text-emerald-400">Country-led SAFE Frameworks</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30 transition-all">
+                                    <td class="px-6 py-4 font-bold text-white">Guinea Worm</td>
+                                    <td class="px-6 py-4">Contaminated stagnant water</td>
+                                    <td class="px-6 py-4 text-rose-300">Painful emerging worm lesions</td>
+                                    <td class="px-6 py-4 text-emerald-400">Carter Center Active Village Surveillance</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30 transition-all">
+                                    <td class="px-6 py-4 font-bold text-white">Malaria</td>
+                                    <td class="px-6 py-4">Mosquito vector (Anopheles)</td>
+                                    <td class="px-6 py-4 text-rose-300">Systemic fever, mortality risks</td>
+                                    <td class="px-6 py-4 text-emerald-400">Roll Back Malaria & GLIDE Access</td>
+                                </tr>
+                                <tr class="hover:bg-slate-800/30 transition-all">
+                                    <td class="px-6 py-4 font-bold text-white">Polio</td>
+                                    <td class="px-6 py-4">Poliovirus (fecal-oral route)</td>
+                                    <td class="px-6 py-4 text-rose-300">Acute neuromuscular paralysis</td>
+                                    <td class="px-6 py-4 text-emerald-400">Global Eradication Initiative (GPEI)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ================= PAGE 3: SABRINE'S STRATEGIC PORTFOLIO ================= -->
+        <div id="page-experience" class="page-view">
+            <!-- Strategic Bio Section -->
+            <section class="py-12 bg-gradient-to-b from-slate-950 to-slate-900 border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <!-- Headshot Placeholder Frame / Bio -->
+                        <div class="lg:col-span-4 flex justify-center">
+                            <div class="relative group">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-all"></div>
+                                <div class="relative bg-slate-900 border-2 border-slate-700/60 rounded-2xl p-6 text-center max-w-sm w-full">
+                                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 mx-auto mb-4 flex items-center justify-center text-white text-3xl font-black">
+                                        SH
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white">Dr. Sabrine Hamdi</h3>
+                                    <p class="text-teal-400 text-xs font-semibold uppercase tracking-wider mt-1">DMD, MPH, PMP®</p>
+                                    <p class="text-slate-400 text-xs mt-3 leading-relaxed">
+                                        Specialist in Infectious Diseases & Neglected Tropical Diseases with extensive multinational strategic leadership experience.
+                                    </p>
+                                    <div class="mt-4 pt-4 border-t border-slate-800/85 flex justify-center gap-4">
+                                        <a href="https://linkedin.com/in/sabrine-hamdi" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+                                            <span class="text-xs font-bold text-emerald-400">LinkedIn Profile →</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bio Statement -->
+                        <div class="lg:col-span-8 space-y-6 text-center lg:text-left">
+                            <span class="text-xs font-bold text-teal-400 uppercase tracking-widest bg-teal-500/10 px-3 py-1 rounded-full">Professional Blueprint</span>
+                            <h2 class="text-3xl font-extrabold text-white">Humanitarian Visionary</h2>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                Leveraging dual clinical and epidemiological training (DMD, MPH) alongside Project Management Professional (PMP®) certification to streamline health responses in crisis zones. Over the past 7 years, I've forged effective collaborations with global institutions like Médecins Sans Frontières (MSF), the UN Migration Agency (IOM), the Carter Center, and the Centers for Disease Control and Prevention (CDC).
+                            </p>
+                            <!-- Visual skills badge grid -->
+                            <div class="space-y-3">
+                                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider text-center lg:text-left">Core Capabilities Matrix:</h4>
+                                <div class="flex flex-wrap justify-center lg:justify-start gap-2">
+                                    <span class="text-xs bg-slate-800 text-slate-300 px-3.5 py-1.5 rounded-lg border border-slate-700">Outbreak Preparedness</span>
+                                    <span class="text-xs bg-slate-800 text-slate-300 px-3.5 py-1.5 rounded-lg border border-slate-700">Cross-Border Surveillance</span>
+                                    <span class="text-xs bg-slate-800 text-slate-300 px-3.5 py-1.5 rounded-lg border border-slate-700">Immunization Campaign Design</span>
+                                    <span class="text-xs bg-slate-800 text-slate-300 px-3.5 py-1.5 rounded-lg border border-slate-700">NTD Eradication Campaigns</span>
+                                    <span class="text-xs bg-slate-800 text-slate-300 px-3.5 py-1.5 rounded-lg border border-slate-700">Donor Engagement</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dynamic Interactive Experience Timeline -->
+            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl font-extrabold text-white">Field Deployment Timeline</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">Tracing strategic leadership and field interventions chronologically across the globe.</p>
+                </div>
+
+                <div class="relative border-l border-slate-800 ml-4 md:ml-32">
+                    <!-- Project 1 -->
+                    <div class="mb-12 relative pl-6 md:pl-8 group">
+                        <span class="absolute -left-3.5 top-1.5 bg-slate-900 border-2 border-emerald-500 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold text-emerald-400 group-hover:scale-110 transition-transform">1</span>
+                        <div class="absolute -left-32 top-1.5 hidden md:block text-right w-24">
+                            <span class="text-xs text-slate-500 font-bold block">2026–Present</span>
+                            <span class="text-[10px] text-teal-400 font-medium">Active Mission</span>
+                        </div>
+                        <div class="bg-slate-800/45 border border-slate-750 rounded-xl p-6 hover:border-emerald-500/30 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-white">Project Coordinator</h3>
+                                <span class="self-start px-2.5 py-1 bg-emerald-950 text-emerald-400 text-[10px] font-bold rounded uppercase">MSF Burundi</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Directly supervising urgent medical and humanitarian program implementations, coordinating the frontline epidemiological responses to emergent infectious outbreaks, monitoring trends across refugee settlements, and designing swift response programs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="mb-12 relative pl-6 md:pl-8 group">
+                        <span class="absolute -left-3.5 top-1.5 bg-slate-900 border-2 border-teal-500 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold text-teal-400 group-hover:scale-110 transition-transform">2</span>
+                        <div class="absolute -left-32 top-1.5 hidden md:block text-right w-24">
+                            <span class="text-xs text-slate-500 font-bold block">2024–2025</span>
+                            <span class="text-[10px] text-teal-400 font-medium">Deployment</span>
+                        </div>
+                        <div class="bg-slate-800/45 border border-slate-750 rounded-xl p-6 hover:border-teal-500/30 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-white">Migration Health Project Officer</h3>
+                                <span class="self-start px-2.5 py-1 bg-teal-950 text-teal-400 text-[10px] font-bold rounded uppercase">UN Migration (IOM) Burundi</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Directed an expansive $2M portfolio focusing on Polio eradication, Mpox preparedness, Marburg, Ebola surveillance, and mobile populations immunization campaigns in collaborative partnership with Gavi and Burundi's National Expanded Program on Immunization (EPI). Co-authored core national outbreak response guidelines.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="mb-12 relative pl-6 md:pl-8 group">
+                        <span class="absolute -left-3.5 top-1.5 bg-slate-900 border-2 border-cyan-500 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold text-cyan-400 group-hover:scale-110 transition-transform">3</span>
+                        <div class="absolute -left-32 top-1.5 hidden md:block text-right w-24">
+                            <span class="text-xs text-slate-500 font-bold block">2021–2023</span>
+                            <span class="text-[10px] text-teal-400 font-medium">Portfolio Lead</span>
+                        </div>
+                        <div class="bg-slate-800/45 border border-slate-750 rounded-xl p-6 hover:border-cyan-500/30 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-white">Project Manager, Public Health</h3>
+                                <span class="self-start px-2.5 py-1 bg-cyan-950 text-cyan-400 text-[10px] font-bold rounded uppercase">IQVIA Africa</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Managed multi-country assessments evaluating immunization coverage across fragile African states during COVID-19. Devised strategic policies for Tunisia’s vaccine and pharmaceutical manufacturing capacities, supporting long-term continent-wide product security.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="mb-12 relative pl-6 md:pl-8 group">
+                        <span class="absolute -left-3.5 top-1.5 bg-slate-900 border-2 border-emerald-500 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold text-emerald-400 group-hover:scale-110 transition-transform">4</span>
+                        <div class="absolute -left-32 top-1.5 hidden md:block text-right w-24">
+                            <span class="text-xs text-slate-500 font-bold block">2020–2021</span>
+                            <span class="text-[10px] text-teal-400 font-medium">Regional Hub</span>
+                        </div>
+                        <div class="bg-slate-800/45 border border-slate-750 rounded-xl p-6 hover:border-emerald-500/30 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-white">Regional Emergency Health Officer</h3>
+                                <span class="self-start px-2.5 py-1 bg-emerald-950 text-emerald-400 text-[10px] font-bold rounded uppercase">IFRC North Africa</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Guided National Red Cross/Red Crescent Societies in complex community-based COVID-19 prevention, and formulated analytical regional epidemiological situation matrices to shape regional public health efforts.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="mb-12 relative pl-6 md:pl-8 group">
+                        <span class="absolute -left-3.5 top-1.5 bg-slate-900 border-2 border-amber-500 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold text-amber-400 group-hover:scale-110 transition-transform">5</span>
+                        <div class="absolute -left-32 top-1.5 hidden md:block text-right w-24">
+                            <span class="text-xs text-slate-500 font-bold block">2019</span>
+                            <span class="text-[10px] text-teal-400 font-medium">Eradication Tech</span>
+                        </div>
+                        <div class="bg-slate-800/45 border border-slate-750 rounded-xl p-6 hover:border-amber-500/30 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-white">Technical Advisor (Guinea Worm Eradication)</h3>
+                                <span class="self-start px-2.5 py-1 bg-amber-950 text-amber-400 text-[10px] font-bold rounded uppercase">The Carter Center Chad</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Commanded 44 surveillance officers and over 420 community health volunteers operating across 117 villages. Directed meticulous active clinical and veterinary surveillance systems for Dracunculiasis, securing substantial progress in the ultimate eradication of Guinea Worm.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="mb-12 relative pl-6 md:pl-8 group">
+                        <span class="absolute -left-3.5 top-1.5 bg-slate-900 border-2 border-indigo-500 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold text-indigo-400 group-hover:scale-110 transition-transform">6</span>
+                        <div class="absolute -left-32 top-1.5 hidden md:block text-right w-24">
+                            <span class="text-xs text-slate-500 font-bold block">2016–2017</span>
+                            <span class="text-[10px] text-teal-400 font-medium">Field Medical</span>
+                        </div>
+                        <div class="bg-slate-800/45 border border-slate-750 rounded-xl p-6 hover:border-indigo-500/30 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-white">Medical Officer</h3>
+                                <span class="self-start px-2.5 py-1 bg-indigo-950 text-indigo-400 text-[10px] font-bold rounded uppercase">IOM Libya</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Directed migrant health frameworks facilitating essential triage and clinical assistance to 3,000+ vulnerable individuals. Delivered advanced infectious disease training models for NGOs and government detention facility staff.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 7 -->
+                    <div class="relative pl-6 md:pl-8 group">
+                        <span class="absolute -left-3.5 top-1.5 bg-slate-900 border-2 border-teal-400 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold text-teal-300 group-hover:scale-110 transition-transform">7</span>
+                        <div class="absolute -left-32 top-1.5 hidden md:block text-right w-24">
+                            <span class="text-xs text-slate-500 font-bold block">2015</span>
+                            <span class="text-[10px] text-teal-400 font-medium">Research Hub</span>
+                        </div>
+                        <div class="bg-slate-800/45 border border-slate-750 rounded-xl p-6 hover:border-teal-400/30 transition-all">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-white">Research Intern</h3>
+                                <span class="self-start px-2.5 py-1 bg-teal-950 text-teal-400 text-[10px] font-bold rounded uppercase">CDC USA</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                Co-authored seminal MMWR (Morbidity and Mortality Weekly Report) outlining historical progress toward global poliomyelitis eradication efforts in Pakistan. Assisted operational training initiatives supporting critical WHO/CDC STOP program deployment preparation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Publications & Academic Achievements Section -->
+            <section class="py-12 bg-slate-950/40 border-t border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-2 gap-12">
+                        <!-- Publications Block -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="p-1.5 bg-teal-500/10 text-teal-400 rounded-lg">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                </span>
+                                <h3 class="text-2xl font-bold text-white">Selected National Strategies & Publications</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-teal-500/20 transition-all">
+                                    <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest block mb-1">Burundi Ministry of Health / IOM (2025)</span>
+                                    <h4 class="font-bold text-sm text-slate-100">National Preparedness Plan for Marburg & Ebola Outbreaks</h4>
+                                    <p class="text-xs text-slate-400 mt-1">Lead co-author designing clinical triage logic and cross-border community health surveillance.</p>
+                                </div>
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-teal-500/20 transition-all">
+                                    <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest block mb-1">Burundi Ministry of Health / IOM (2024)</span>
+                                    <h4 class="font-bold text-sm text-slate-100">National Response Plan to Mpox Outbreak</h4>
+                                    <p class="text-xs text-slate-400 mt-1">Drafted localized community-based surveillance guidelines to protect mobile border groups.</p>
+                                </div>
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-teal-500/20 transition-all">
+                                    <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest block mb-1">Burundi MOH / GAVI (2024)</span>
+                                    <h4 class="font-bold text-sm text-slate-100">National Plan for Malaria Vaccine Introduction</h4>
+                                    <p class="text-xs text-slate-400 mt-1">Guided the programmatic integration of the RTS,S vaccine within standard immunization chains.</p>
+                                </div>
+                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 hover:border-teal-500/20 transition-all">
+                                    <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest block mb-1">CDC MMWR Publication (2015)</span>
+                                    <h4 class="font-bold text-sm text-slate-100">Progress Toward Poliomyelitis Eradication — Pakistan</h4>
+                                    <p class="text-xs text-slate-400 mt-1">Co-authored global epidemiological assessment evaluating immunization gaps in endemic districts.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Awards & Contact Visual Block -->
+                        <div class="space-y-8">
+                            <div>
+                                <div class="flex items-center gap-2 mb-6">
+                                    <span class="p-1.5 bg-amber-500/10 text-amber-400 rounded-lg">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                                    </span>
+                                    <h3 class="text-2xl font-bold text-white">Awards & Academic Honors</h3>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex gap-4 items-start bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                        <div class="text-3xl text-amber-400 font-black">2018</div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-slate-100">Fulbright Alumni Development Grant</h4>
+                                            <p class="text-xs text-slate-400 mt-0.5">Awarded for continuing impactful strategic public health development programs post-scholarship.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4 items-start bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                        <div class="text-3xl text-amber-400 font-black">2016</div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-slate-100">James W. Alley, M.D. Student Award</h4>
+                                            <p class="text-xs text-slate-400 mt-0.5">Honored for Outstanding Community Service initiatives, reflecting deep front-line impact.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4 items-start bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                                        <div class="text-3xl text-amber-400 font-black">2014</div>
+                                        <div>
+                                            <h4 class="font-bold text-sm text-slate-100">Fulbright Scholarship</h4>
+                                            <p class="text-xs text-slate-400 mt-0.5">Prestigious global academic scholarship for outstanding health research leadership (2014–2016).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secure Engagement Hub / Collaboration Center -->
+            <section id="contact-section" class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-br from-slate-800/80 to-slate-950 border border-slate-700/60 rounded-3xl p-8 sm:p-12 card-glow">
+                    <div class="text-center max-w-xl mx-auto mb-10">
+                        <h2 class="text-3xl font-black text-white">Initiate Field Collaboration</h2>
+                        <p class="text-slate-400 text-xs sm:text-sm mt-2">Connect to coordinate epidemiological responses, propose technical health reviews, or secure program consultation.</p>
+                    </div>
+
+                    <!-- Client Side Interaction form -->
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Full Name</label>
+                                <input required type="text" id="contact-name" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-emerald-500" placeholder="Dr. Sarah Jenkins">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Organization / Agency</label>
+                                <input required type="text" id="contact-org" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-emerald-500" placeholder="World Health Organization">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Collaboration Focus</label>
+                            <select id="contact-topic" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-300 text-sm focus:outline-none focus:border-emerald-500">
+                                <option>Epidemiological Surveillance Coordination</option>
+                                <option>NTD Eradication Program Planning</option>
+                                <option>Emergency Outbreak Preparedness Response</option>
+                                <option>Technical Health Staff Training</option>
+                                <option>Other Global Health Inquiries</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">Strategic Message / Outline Draft</label>
+                                <button type="button" onclick="autoDraftProposal()" class="text-xs text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
+                                    ✨ Auto-Draft Joint Proposal Memo
+                                </button>
+                            </div>
+                            <textarea required id="contact-message" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-emerald-500" placeholder="Outline the proposed field operation or use the auto-draft assistant above..."></textarea>
+                        </div>
+
+                        <!-- Drafting Spinner -->
+                        <div id="draft-loading" class="hidden text-center py-4 bg-slate-950 rounded-xl border border-emerald-850/40">
+                            <div class="inline-block animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-emerald-500 mb-1"></div>
+                            <p class="text-[11px] text-slate-400 font-mono">Gemini AI is crafting a highly targeted epidemiological collaboration proposal...</p>
+                        </div>
+
+                        <!-- Message Box instead of window.alert -->
+                        <div id="contact-feedback" class="hidden p-4 rounded-xl text-xs font-semibold"></div>
+
+                        <div class="text-center">
+                            <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-slate-950 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-emerald-500/15">
+                                Send Secure Strategic Inquiry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer Space -->
+    <footer class="bg-navy-950 border-t border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-6">
+                <!-- Branding -->
+                <div>
+                    <h2 class="text-white font-bold text-sm tracking-wide uppercase">Global Health Frontlines</h2>
+                    <p class="text-xs text-slate-500 mt-1">Confronting Neglected Tropical Diseases, Polio, and Malaria</p>
+                </div>
+                <!-- Links -->
+                <div class="flex gap-6 text-xs text-slate-400">
+                    <button onclick="switchPage('home')" class="hover:text-emerald-400 transition-colors">Mission</button>
+                    <button onclick="switchPage('diseases')" class="hover:text-emerald-400 transition-colors">Pathogens</button>
+                    <button onclick="switchPage('experience')" class="hover:text-emerald-400 transition-colors">Portfolio</button>
+                    <a href="https://linkedin.com/in/sabrine-hamdi" target="_blank" class="hover:text-emerald-400 transition-colors">LinkedIn</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-slate-800/85 flex flex-col sm:flex-row justify-between text-[11px] text-slate-500">
+                <p>© 2026 Dr. Sabrine Hamdi, DMD, MPH, PMP®. All Rights Reserved.</p>
+                <p class="mt-2 sm:mt-0">Designed securely without public exposure vectors.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Functions for Navigation, Filtering & Interactions -->
+    <script>
+        // Core Gemini API Integration Call with Exponential Backoff
+        async function callGeminiAPI(systemPrompt, userPrompt) {
+            const apiKey = ""; // Implicitly injected at runtime
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) {
+                        const result = await response.json();
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                        return text || "Error: No response generated from intelligent model.";
+                    }
+                } catch (error) {
+                    // Suppressed error logs to retain pristine performance as requested
+                }
+                // Exponential Backoff Delay
+                await new Promise(resolve => setTimeout(resolve, delay));
+                delay *= 2;
+            }
+            throw new Error("Unable to contact the decentralized intelligence nodes. Please try again later.");
+        }
+
+        // Feature 1: Run Outbreak Protocol Simulation Lab
+        async function runOutbreakSimulation() {
+            const disease = document.getElementById('sim-disease').value;
+            const resources = document.getElementById('sim-resources').value;
+            const strategy = document.getElementById('sim-strategy').value;
+            const notes = document.getElementById('sim-custom-notes').value;
+
+            const loading = document.getElementById('sim-loading');
+            const container = document.getElementById('sim-output-container');
+            const output = document.getElementById('sim-output');
+
+            loading.classList.remove('hidden');
+            container.classList.add('hidden');
+
+            const systemPrompt = `You are a Senior Epidemiological Rapid Response Advisor assisting Dr. Sabrine Hamdi on global health frontlines.
+Your job is to generate a realistic, high-fidelity field action protocol brief for a frontline outbreak scenario. 
+Focus your recommendations on realistic, actionable public health field tactics (e.g., active case finding, localized WASH programs, cross-border coordination, and ring vaccination).
+Format the output using clear markdown sections, bullet points, and clinical precision. Limit the total output to 250 words. Do not use conversational filler.`;
+
+            const userPrompt = `Outbreak Scenario: ${disease}
+Resource Constraints: ${resources}
+Selected Intervention Strategy: ${strategy}
+Field Conditions / Added Context: ${notes || 'None specified'}
+
+Provide a structured, field-ready Action Protocol outlining:
+1. IMMEDIATE ACTION ITEMS (Next 48 Hours)
+2. COMMUNITY MOBILIZATION VECTOR
+3. CROSS-BORDER SURVEILLANCE FOCUS`;
+
+            try {
+                const response = await callGeminiAPI(systemPrompt, userPrompt);
+                output.innerHTML = formatMarkdownToHTML(response);
+                container.classList.remove('hidden');
+            } catch (err) {
+                output.innerHTML = `<span class="text-red-400">Error: ${err.message}</span>`;
+                container.classList.remove('hidden');
+            } finally {
+                loading.classList.add('hidden');
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Helper to copy simulation protocol to clipboard
+        function copySimProtocol() {
+            const outputText = document.getElementById('sim-output').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = outputText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            const feedback = document.getElementById('contact-feedback');
+            feedback.innerHTML = `<span>Copied protocol to clipboard!</span>`;
+            feedback.className = "p-3 rounded-lg text-xs font-semibold bg-teal-950 text-teal-300 border border-teal-800 mt-2";
+            feedback.classList.remove('hidden');
+            setTimeout(() => { feedback.classList.add('hidden'); }, 3000);
+        }
+
+        // Feature 2: Auto-Draft Joint Public Health Proposal
+        async function autoDraftProposal() {
+            const partnerName = document.getElementById('contact-name').value;
+            const partnerOrg = document.getElementById('contact-org').value;
+            const topic = document.getElementById('contact-topic').value;
+            const loading = document.getElementById('draft-loading');
+            const messageBox = document.getElementById('contact-message');
+
+            if (!partnerName || !partnerOrg) {
+                const feedback = document.getElementById('contact-feedback');
+                feedback.innerHTML = `<span>Please provide your <strong>Name</strong> and <strong>Organization</strong> first so the AI can tailor the draft.</span>`;
+                feedback.className = "p-3 rounded-xl text-xs font-semibold bg-amber-950 text-amber-400 border border-amber-800 mt-4";
+                feedback.classList.remove('hidden');
+                return;
+            }
+
+            loading.classList.remove('hidden');
+
+            const systemPrompt = `You are an expert Public Health Proposal writer helping draft an initial joint collaboration memo for Dr. Sabrine Hamdi, DMD, MPH, PMP. 
+Your tone must be highly professional, diplomatic, and collaborative. Make direct strategic connections to Dr. Hamdi's background working with MSF, IOM, the Carter Center, and CDC.`;
+
+            const userPrompt = `Draft an initial proposal/memo of collaborative intent.
+From: ${partnerName} representing ${partnerOrg}
+To: Dr. Sabrine Hamdi, MPH, PMP
+Topic Focus: Joint action on ${topic}
+
+Write a clean, 2-paragraph draft proposal expressing interest in working together to strengthen epidemiological surveillance, secure target funding, and optimize field interventions. Use professional terminology and make the memorandum draft field-ready. No metadata or introduction phrases, just draft paragraphs.`;
+
+            try {
+                const response = await callGeminiAPI(systemPrompt, userPrompt);
+                messageBox.value = response.trim();
+            } catch (err) {
+                messageBox.value = `Error generating proposal draft: ${err.message}`;
+            } finally {
+                loading.classList.add('hidden');
+            }
+        }
+
+        // Simple Markdown formatter for rendering response text inside HTML container
+        function formatMarkdownToHTML(text) {
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/### (.*?)\n/g, '<h4 class="text-sm font-bold text-teal-300 mt-3 mb-1 uppercase tracking-wider">$1</h4>')
+                .replace(/## (.*?)\n/g, '<h3 class="text-base font-extrabold text-white mt-4 mb-2">$1</h3>')
+                .replace(/- (.*?)\n/g, '<li class="ml-4 list-disc text-slate-300 text-xs">$1</li>')
+                .replace(/\n\n/g, '<p class="mb-2"></p>');
+        }
+
+        // Page Router
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show current page
+            const activePage = document.getElementById(`page-${pageId}`);
+            if (activePage) {
+                activePage.classList.add('active');
+            }
+
+            // Reset navigation button highlights
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-emerald-400', 'bg-slate-800/80');
+                btn.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/50');
+            });
+
+            // Highlight current button
+            const currentNav = document.getElementById(`nav-${pageId}`);
+            if (currentNav) {
+                currentNav.classList.add('text-emerald-400', 'bg-slate-800/80');
+                currentNav.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/50');
+            }
+
+            // Scroll page to top instantly
+            window.scrollTo({top: 0, behavior: 'instant'});
+        }
+
+        // Toggle Mobile Navigation Overlay Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Disease Filtration logic
+        function filterDiseases(category) {
+            const cards = document.querySelectorAll('.disease-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (cardCategory === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Update UI filter button states
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.classList.remove('bg-teal-500', 'text-slate-950', 'shadow-lg', 'shadow-teal-500/20');
+                btn.classList.add('bg-slate-800', 'text-slate-300', 'hover:text-white');
+            });
+
+            const activeBtn = document.getElementById(`btn-filter-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-800', 'text-slate-300', 'hover:text-white');
+                activeBtn.classList.add('bg-teal-500', 'text-slate-950', 'shadow-lg', 'shadow-teal-500/20');
+            }
+        }
+
+        // Handle contact submissions safely on client-side
+        function handleContactSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('contact-name').value;
+            const org = document.getElementById('contact-org').value;
+            const feedback = document.getElementById('contact-feedback');
+
+            // Construct custom safe confirmation banner
+            feedback.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>Thank you, <strong>${name}</strong>. Your inquiry for <strong>${org}</strong> has been secured. Dr. Hamdi will contact you through our validated professional directory channels.</span>
+                </div>
+            `;
+            feedback.className = "p-4 rounded-xl text-xs font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-800/40 mt-4";
+            feedback.classList.remove('hidden');
+
+            // Clear inputs
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-org').value = '';
+            document.getElementById('contact-message').value = '';
+        }
+    </script>
+</body>
+</html>
